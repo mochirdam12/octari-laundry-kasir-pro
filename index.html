@@ -48,5 +48,20 @@ function renderReports(){let d=$('reportDay').value||today(),m=$('reportMonth').
 function showPage(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');$('pageTitle').textContent=id[0].toUpperCase()+id.slice(1)}
 async function logout(){await sb.auth.signOut();location.reload()}
 $('kg').oninput=calc;$('paid').oninput=calc;$('svc').onchange=calc;
-(async()=>{if(!bootClient()){document.getElementById('setup').style.display='flex';document.getElementById('login').style.display='none';return}try{let {data:{session}}=await sb.auth.getSession();if(session)await start();}catch(e){document.getElementById('loginMsg').textContent='Gagal terhubung ke Supabase: '+(e.message||e);}})();
+(async()=>{
+  if(!bootClient()){
+    document.getElementById('setup').style.display='flex';
+    document.getElementById('login').style.display='none';
+    return;
+  }
+
+  document.getElementById('setup').style.display='none';
+  document.getElementById('login').style.display='flex';
+
+  try{
+    await sb.auth.signOut();
+  }catch(e){
+    console.log('Session lama dibersihkan:', e);
+  }
+})();
 </script><script>if("serviceWorker" in navigator)navigator.serviceWorker.register("service-worker.js").catch(()=>{});</script></body></html>
