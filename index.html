@@ -46,7 +46,24 @@ function renderServices(){$('serviceList').innerHTML=services.map(x=>`<div class
 function renderExpenses(){$('expenseList').innerHTML=expenses.map(x=>`<div class="order"><span>${esc(x.expense_date||isoDay(x.created_at))}<br><b>${esc(x.description||'Pengeluaran')}</b></span><b>${rup(x.amount)}</b></div>`).join('')||'<p class="muted">Belum ada pengeluaran.</p>'}
 function renderReports(){let d=$('reportDay').value||today(),m=$('reportMonth').value||today().slice(0,7),tr=transactions.filter(x=>isoDay(x.created_at)===d),ex=expenses.filter(x=>(x.expense_date||isoDay(x.created_at))===d),r=tr.reduce((a,x)=>a+Number(x.total),0),e=ex.reduce((a,x)=>a+Number(x.amount),0);$('dailyReport').innerHTML=`<p>Pendapatan <b>${rup(r)}</b> • Pengeluaran <b>${rup(e)}</b> • Laba <b>${rup(r-e)}</b></p><table class="table"><tr><th>Nota</th><th>Pelanggan</th><th>Total</th></tr>${tr.map(x=>`<tr><td>${x.id.slice(-6)}</td><td>${esc(x.customer_name)}</td><td>${rup(x.total)}</td></tr>`).join('')}</table>`;let tm=transactions.filter(x=>isoDay(x.created_at).startsWith(m)),em=expenses.filter(x=>(x.expense_date||isoDay(x.created_at)).startsWith(m)),rm=tm.reduce((a,x)=>a+Number(x.total),0),ee=em.reduce((a,x)=>a+Number(x.amount),0);$('monthlyReport').innerHTML=`<p>Pendapatan <b>${rup(rm)}</b> • Pengeluaran <b>${rup(ee)}</b> • Laba <b>${rup(rm-ee)}</b> • Transaksi <b>${tm.length}</b></p>`}
 function showPage(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');$('pageTitle').textContent=id[0].toUpperCase()+id.slice(1)}
-async function logout(){await sb.auth.signOut();location.reload()}
+async function logout(){
+  try{
+    await sb.auth.signOut();
+  }catch(e){
+    console.log(e);
+  }
+
+  document.getElementById('login').style.display='flex';
+  document.getElementById('setup').style.display='none';
+
+  const userInput = document.getElementById('loginUser');
+  const passInput = document.getElementById('loginPass');
+
+  if(userInput) userInput.value='';
+  if(passInput) passInput.value='';
+
+  document.getElementById('loginMsg').textContent='';
+}
 $('kg').oninput=calc;$('paid').oninput=calc;$('svc').onchange=calc;
 (async()=>{
   if(!bootClient()){
