@@ -59,9 +59,10 @@ $('kg').oninput=calc;$('paid').oninput=calc;$('svc').onchange=calc;
   document.getElementById('login').style.display='flex';
 
   try{
-    await sb.auth.signOut();
+    await sb.auth.getSession();
   }catch(e){
-    console.log('Session lama dibersihkan:', e);
+    document.getElementById('loginMsg').textContent =
+      'Gagal terhubung ke Supabase: ' + (e.message || e);
   }
 })();
 </script><script>if("serviceWorker" in navigator)navigator.serviceWorker.register("service-worker.js").catch(()=>{});</script></body></html>
