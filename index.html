@@ -1,39 +1,184 @@
--- OCTARI LAUNDRY KASIR PRO V8
--- Owner dapat menghapus pelanggan tanpa menghapus riwayat transaksi.
--- Jalankan SEKALI di Supabase SQL Editor.
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#0759aa"><title>OCTARI LAUNDRY KASIR PRO V8 ONLINE</title><link rel="manifest" href="manifest.json"><style>
+:root{--blue:#0878d1;--deep:#0755a0;--bg:#eef8ff;--card:#fff;--line:#d9e9f3;--text:#123b63;--muted:#66819a;--green:#12a878;--red:#ef476f;--orange:#ffab20}*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;color:var(--text);background:linear-gradient(135deg,#e9f8ff,#fff 50%,#eef9ff);font-size:14px}button,input,select{font:inherit}button{cursor:pointer}.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:15px;background:linear-gradient(145deg,#bfeeff,#f8fdff 55%,#dff6ff)}.login-card{width:min(400px,100%);background:#fff;border-radius:24px;padding:24px 20px;box-shadow:0 15px 45px #0573bd2b;text-align:center;border:1px solid #d8edf8}.login-logo{width:205px;height:170px;object-fit:contain}.login-title{font-size:25px;font-weight:900;color:#07519b}.login-sub{color:#52708b;margin:7px 0 18px}.field{margin:10px 0;text-align:left}.field label{font-weight:700;display:block;margin-bottom:6px}.field input,.field select{width:100%;border:1px solid #cfe2ee;border-radius:11px;padding:12px;background:#fff}.primary,.btn{border:0;border-radius:10px;padding:12px 14px;font-weight:800}.primary{width:100%;background:linear-gradient(90deg,#0789e6,#0871cc);color:#fff}.danger{color:var(--red)}.muted{color:var(--muted)}#app{display:none}.layout{min-height:100vh;display:flex}.sidebar{width:225px;background:linear-gradient(180deg,#0759aa,#034b93);color:#fff;position:fixed;inset:0 auto 0 0;padding:12px 10px;z-index:20}.brand{display:flex;gap:8px;align-items:center;padding:5px 7px 16px;border-bottom:1px solid #ffffff2c}.brand img{width:52px;height:52px;object-fit:contain}.brand b{font-size:16px}.brand small{display:block;opacity:.8}.nav{padding-top:10px}.nav button{width:100%;border:0;background:transparent;color:#fff;text-align:left;padding:11px 12px;border-radius:10px;margin:2px 0;font-weight:700}.nav button.active,.nav button:hover{background:#0b8fe5}.logout{position:absolute;bottom:15px;left:10px;right:10px;background:#ef476f!important}.content{margin-left:225px;width:calc(100% - 225px);padding:14px}.topbar{height:51px;background:#fff;border:1px solid var(--line);border-radius:12px;display:flex;align-items:center;justify-content:space-between;padding:0 15px;margin-bottom:12px}.page{display:none}.page.active{display:block}.welcome,.card,.stat{background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 4px 16px #075aa00b}.welcome{padding:17px;margin-bottom:12px;background:linear-gradient(100deg,#d9f5ff,#fff)}.welcome h1{margin:0 0 5px;font-size:22px}.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:9px;margin-bottom:12px}.stat{padding:13px}.stat b{display:block;font-size:20px;margin-top:9px}.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}.card{padding:14px;margin-bottom:10px}.card h3{margin:0 0 12px}.order,.service{border-bottom:1px solid #e8f0f5;padding:9px 0;display:flex;justify-content:space-between;gap:8px;align-items:center}.service{border:1px solid #d6e7f1;border-radius:10px;padding:12px;margin:7px 0}.badge{padding:5px 8px;border-radius:10px;font-size:10px;font-weight:800}.processing{background:#fff0d1;color:#a56b00}.done{background:#dcf7eb;color:#087b5b}.small{padding:8px 10px;border:0;border-radius:8px;background:#087ee0;color:#fff;font-weight:700;font-size:11px}.btn{background:#087ee0;color:#fff}.btn.green{background:var(--green)}.btn.red{background:var(--red)}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.full{grid-column:1/-1}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:9px 7px;border-bottom:1px solid #edf2f6;text-align:left;font-size:12px}.toolbar{display:flex;gap:8px;justify-content:space-between;align-items:center;margin-bottom:10px}.toolbar input,.toolbar select{padding:10px;border:1px solid #cfe2ee;border-radius:9px}.mobile-nav{display:none}.role{font-size:11px;padding:4px 7px;border-radius:8px;background:#e7f4ff;color:#0759aa;font-weight:800}.top-logout{margin-left:7px;border:0;border-radius:9px;background:#ef476f;color:#fff;padding:8px 11px;font-weight:800;font-size:11px}.top-logout:hover{filter:brightness(.95)}@media(max-width:900px){.sidebar{width:68px}.brand div,.nav span{display:none}.brand{justify-content:center}.content{margin-left:68px;width:calc(100% - 68px)}.stats{grid-template-columns:1fr 1fr}.grid2{grid-template-columns:1fr}}@media(max-width:600px){body{font-size:13px}.sidebar{display:none}.content{margin:0;padding:8px 8px 78px;width:100%}.topbar{height:50px;position:sticky;top:0;z-index:15}.topbar h2{font-size:17px}.stats{grid-template-columns:1fr 1fr;gap:7px}.stat{padding:10px;min-height:105px}.stat b{font-size:17px}.form-grid,.grid2{grid-template-columns:1fr}.toolbar{flex-direction:column;align-items:stretch}.toolbar input,.toolbar select,.field input,.field select{min-height:43px}.table{min-width:560px}.card:has(.table){overflow-x:auto}.mobile-nav{position:fixed;display:grid;grid-template-columns:repeat(5,1fr);bottom:0;left:0;right:0;background:linear-gradient(90deg,#064e99,#0785da);z-index:30;padding:5px 2px calc(5px + env(safe-area-inset-bottom));box-shadow:0 -5px 18px #034b9340}.mobile-nav button{border:0;background:transparent;color:#fff;font-size:9px;font-weight:800;min-height:52px}.mobile-nav b{display:block;font-size:18px}.login-card{padding:21px 17px}.login-logo{width:200px;height:165px}}
+</style></head><body>
+<div id="setup" class="login" style="display:none"><div class="login-card"><img src="logo-octari.png" class="login-logo"><div class="login-title">Hubungkan Supabase</div><div class="login-sub">OCTARI LAUNDRY KASIR PRO V8 ONLINE</div><div class="field"><label>Project URL</label><input value="https://vcttpicjnlndvmxnzcri.supabase.co" readonly></div><div class="field"><label>Publishable key</label><input id="setupKey" type="password" placeholder="sb_publishable_..." autocomplete="off"></div><button class="primary" onclick="configureApp()">🔗 Hubungkan</button><p class="muted" style="margin-top:12px">Key disimpan hanya di browser ini. Jangan masukkan Secret/service_role key.</p></div></div>
+<div id="login" class="login"><div class="login-card"><img src="logo-octari.png" class="login-logo"><div class="login-title">OCTARI LAUNDRY</div><div class="login-sub">Kasir Pro V8 • ONLINE MULTI-USER</div><div class="field"><label>👤 Username</label><input id="email" type="text" placeholder="owner / kasir1" autocomplete="username"></div><div class="field"><label>🔒 Password</label><input id="password" type="password" placeholder="Password" autocomplete="current-password"></div><button class="primary" onclick="login()">↪ Masuk</button><p id="loginMsg" class="danger"></p><small class="muted">Masuk dengan Username + Password. Karyawan tidak perlu email pribadi.</small></div></div>
+<div id="app"><div class="layout"><aside class="sidebar"><div class="brand"><img src="logo-octari.png"><div><b>Octari Laundry</b><small>Kasir Pro V8 Online</small></div></div><div class="nav"><button class="active" onclick="showPage('dashboard',this)">🏠 <span>Dashboard</span></button><button onclick="showPage('kasir',this)">🧾 <span>Kasir</span></button><button onclick="showPage('pesanan',this)">📋 <span>Pesanan</span></button><button onclick="showPage('pelanggan',this)">👤 <span>Pelanggan</span></button><button onclick="showPage('laporan',this)">📊 <span>Laporan</span></button><button class="ownerOnly" onclick="showPage('keuangan',this)">💰 <span>Keuangan</span></button><button class="ownerOnly" onclick="showPage('layanan',this)">🛠️ <span>Layanan</span></button><button class="logout" onclick="logout()">↪ <span>Keluar</span></button></div></aside><main class="content"><div class="topbar"><h2 id="pageTitle">Dashboard</h2><div><span id="who"></span> <span id="role" class="role"></span> <button class="top-logout" onclick="logout()" title="Keluar dari akun">↪ Keluar</button> <button class="small" onclick="resetConfig()" title="Ganti Publishable key">⚙</button></div></div>
+<section id="dashboard" class="page active"><div class="welcome"><h1>Selamat datang, <span id="welcomeUser">Owner</span> 👋</h1><p>Data tersimpan online dan dapat dipakai bersama oleh Owner & Karyawan.</p></div><div class="stats"><div class="stat">📈 Omzet Hari Ini<b id="rev">Rp0</b></div><div class="stat">💰 Laba Bulan Ini<b id="profit">Rp0</b></div><div class="stat">🧾 Transaksi Bulan Ini<b id="tx">0</b></div><div class="stat">🧺 Diproses<b id="proc">0</b></div></div><div class="grid2"><div class="card"><h3>Pesanan Diproses</h3><div id="dashOrders"></div></div><div class="card"><h3>Ringkasan Bulan Ini</h3><div id="monthSummary"></div></div></div></section>
+<section id="kasir" class="page"><div class="card"><h3>Transaksi Baru</h3><div class="form-grid"><div class="field"><label>Pelanggan</label><select id="cust"></select></div><div class="field"><label>Layanan</label><select id="svc"></select></div><div class="field"><label>Berat (kg)</label><input id="kg" type="number" min="0.1" step="0.1" value="1"></div><div class="field"><label>Uang Dibayar</label><input id="paid" type="number" min="0" value="0"></div><div class="field"><label>Estimasi Selesai</label><input id="dueDate" type="date"></div><div class="field"><label>Catatan</label><input id="trxNote" placeholder="Contoh: pisahkan pakaian putih"></div><div class="full"><div class="card" style="margin:0;background:#f7fcff"><b>Total: <span id="total">Rp0</span></b><br>Kembalian: <b id="change">Rp0</b></div></div><div class="full"><button class="btn green" onclick="saveTx()">💾 Simpan & Cetak Nota</button> <button class="btn" onclick="saveTx(true)">💬 Simpan & Kirim WA</button> <button class="btn" onclick="resetKasir()">Reset</button></div></div></div></section>
+<section id="pesanan" class="page"><div class="card"><div class="toolbar"><input id="searchOrder" placeholder="Cari pelanggan/nota" oninput="renderOrders()"><select id="filterStatus" onchange="renderOrders()"><option value="">Semua Status</option><option>Diproses</option><option>Selesai</option></select></div><div id="orders"></div></div></section>
+<section id="pelanggan" class="page"><div class="card"><h3>Tambah Pelanggan</h3><div class="form-grid"><input id="newName" placeholder="Nama pelanggan"><input id="newWa" placeholder="Nomor WhatsApp"><button class="btn full" onclick="addCustomer()">+ Simpan Pelanggan</button></div></div><div class="card"><h3>Daftar Pelanggan</h3><div id="customerList"></div></div></section>
+<section id="laporan" class="page"><div class="card"><h3>Laporan Harian</h3><input id="reportDay" type="date" onchange="renderReports()"><div id="dailyReport"></div></div><div class="card"><h3>Laporan Bulanan</h3><input id="reportMonth" type="month" onchange="renderReports()"><div id="monthlyReport"></div></div></section>
+<section id="keuangan" class="page ownerOnlyPage"><div class="card"><h3>Tambah Pengeluaran</h3><div class="form-grid"><input id="expName" placeholder="Contoh: Detergen"><input id="expAmount" type="number" placeholder="Nominal"><button class="btn full" onclick="addExpense()">+ Simpan Pengeluaran</button></div></div><div class="card"><h3>Pengeluaran</h3><div id="expenseList"></div></div></section>
+<section id="layanan" class="page ownerOnlyPage"><div class="card"><h3>Kelola Layanan</h3><button class="btn" onclick="addService()">+ Tambah Layanan</button><div id="serviceList"></div></div></section>
+</main></div><nav class="mobile-nav"><button onclick="showPage('dashboard')"><b>🏠</b>Home</button><button onclick="showPage('kasir')"><b>🧾</b>Kasir</button><button onclick="showPage('pesanan')"><b>📋</b>Pesanan</button><button onclick="showPage('pelanggan')"><b>👤</b>Pelanggan</button><button onclick="showPage('laporan')"><b>📊</b>Laporan</button></nav></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+const PROJECT_URL='https://vcttpicjnlndvmxnzcri.supabase.co';
+let sb=null;
+function getKey(){return localStorage.getItem('octari_supabase_publishable_key')||'';}
+function configureApp(){const k=document.getElementById('setupKey').value.trim();if(!k)return alert('Tempel Publishable key terlebih dahulu.');if(!k.startsWith('sb_publishable_'))return alert('Key yang dimasukkan bukan Publishable key Supabase.');localStorage.setItem('octari_supabase_publishable_key',k);location.reload();}
+function resetConfig(){localStorage.removeItem('octari_supabase_publishable_key');location.reload();}
+function bootClient(){const k=getKey();if(!k)return false;sb=supabase.createClient(PROJECT_URL,k);return true;}
 
--- Jadikan relasi transaksi -> pelanggan tetap aman saat pelanggan dihapus.
-DO $$
-DECLARE
-  r record;
-BEGIN
-  FOR r IN
-    SELECT conname
-    FROM pg_constraint
-    WHERE conrelid = 'public.transactions'::regclass
-      AND contype = 'f'
-      AND pg_get_constraintdef(oid) ILIKE '%customer_id%'
-      AND pg_get_constraintdef(oid) ILIKE '%public.customers%'
-  LOOP
-    EXECUTE format('ALTER TABLE public.transactions DROP CONSTRAINT IF EXISTS %I', r.conname);
-  END LOOP;
-END $$;
+let profile=null,services=[],customers=[],transactions=[],expenses=[];const $=id=>document.getElementById(id);const rup=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(Number(n)||0);const isoDay=d=>new Date(d).toLocaleDateString('en-CA');const today=()=>isoDay(new Date());
+function showErr(e){console.error(e);return e?.message||String(e)}
+async function login(){ $('loginMsg').textContent='';let username=$('email').value.trim(),password=$('password').value;if(!username||!password)return $('loginMsg').textContent='Isi username dan password.';let {data,error:resolveError}=await sb.rpc('login_email',{p_username:username});if(resolveError)return $('loginMsg').textContent='Fungsi login belum disiapkan. Jalankan supabase-username-setup.sql.';let email=String(data||'');if(!email)return $('loginMsg').textContent='Username tidak ditemukan.';let {error}=await sb.auth.signInWithPassword({email,password});if(error)return $('loginMsg').textContent=showErr(error);await start();}
+async function start(){let {data:{user}}=await sb.auth.getUser();if(!user)return;let r=await sb.from('profiles').select('id,full_name,role,username').eq('id',user.id).single();if(r.error){$('loginMsg').textContent='Akun belum terhubung ke profile Owner/Karyawan.';await sb.auth.signOut();return}profile=r.data;$('login').style.display='none';$('app').style.display='block';$('who').textContent=(profile.full_name||profile.username||'Pengguna');$('welcomeUser').textContent=profile.full_name;$('role').textContent=profile.role.toUpperCase();applyRole();await loadAll();}
+function applyRole(){document.querySelectorAll('.ownerOnly,.ownerOnlyPage').forEach(x=>x.style.display=profile.role==='owner'?'block':'none')}
+async function loadAll(){let [a,b,c,d]=await Promise.all([sb.from('services').select('*').eq('active',true).order('created_at'),sb.from('customers').select('*').order('created_at',{ascending:false}),sb.from('transactions').select('*').order('created_at',{ascending:false}).limit(5000),sb.from('expenses').select('*').order('created_at',{ascending:false}).limit(5000)]);for(let x of [a,b,c,d])if(x.error)throw x.error;services=a.data||[];customers=b.data||[];transactions=c.data||[];expenses=d.data||[];renderAll();}
+function renderAll(){ $('cust').innerHTML=customers.map(x=>`<option value="${x.id}">${esc(x.name)}</option>`).join('');$('svc').innerHTML=services.map(x=>`<option value="${x.id}">${esc(x.name)} — ${rup(x.price)}/kg</option>`).join('');calc();let d=today(),m=d.slice(0,7),td=transactions.filter(x=>isoDay(x.created_at)===d),mt=transactions.filter(x=>isoDay(x.created_at).startsWith(m)),ex=expenses.filter(x=>(x.expense_date||isoDay(x.created_at)).startsWith(m));let rev=td.reduce((a,x)=>a+Number(x.total),0),mo=mt.reduce((a,x)=>a+Number(x.total),0),ee=ex.reduce((a,x)=>a+Number(x.amount),0);$('rev').textContent=rup(rev);$('profit').textContent=rup(mo-ee);$('tx').textContent=mt.length;$('proc').textContent=transactions.filter(x=>x.status==='Diproses').length;$('dashOrders').innerHTML=transactions.filter(x=>x.status==='Diproses').slice(0,5).map(x=>`<div class="order"><span><b>${esc(x.customer_name)}</b><br>${esc(x.service_name)} • ${x.kg} kg${x.due_date?`<br><small>Estimasi: ${esc(x.due_date)}</small>`:''}</span><span><button class="small" onclick="done('${x.id}')">✓ Selesai</button> <button class="small" onclick="waReceipt(transactions.find(a=>a.id==='${x.id}'))">💬 WA</button></span></div>`).join('')||'<p class="muted">Tidak ada pesanan.</p>';$('monthSummary').innerHTML=`<p>Pendapatan: <b>${rup(mo)}</b></p><p>Pengeluaran: <b>${rup(ee)}</b></p><p>Laba bersih: <b>${rup(mo-ee)}</b></p>`;renderOrders();renderCustomers();renderServices();renderExpenses();renderReports();}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m]))}
+function calc(){let s=services.find(x=>x.id===$('svc').value),kg=Number($('kg').value)||0,total=Number(s?.price||0)*kg,paid=Number($('paid').value)||0;$('total').textContent=rup(total);$('change').textContent=rup(Math.max(0,paid-total));return total}
+async function saveTx(sendWhatsApp=false){
+  let total=calc(),paid=Number($('paid').value)||0;
+  let c=customers.find(x=>x.id===$('cust').value);
+  let s=services.find(x=>x.id===$('svc').value);
+  let kg=Number($('kg').value)||0;
+  let dueDate=$('dueDate')?.value||'';
+  let note=$('trxNote')?.value.trim()||'';
 
-ALTER TABLE public.transactions
-  ALTER COLUMN customer_id DROP NOT NULL;
+  if(!c||!s||kg<=0)return alert('Lengkapi transaksi.');
+  if(paid<total)return alert('Uang dibayar kurang.');
 
-ALTER TABLE public.transactions
-  ADD CONSTRAINT transactions_customer_id_fkey
-  FOREIGN KEY (customer_id)
-  REFERENCES public.customers(id)
-  ON DELETE SET NULL;
+  let base={customer_id:c.id,service_id:s.id,customer_name:c.name,customer_wa:c.wa||'',service_name:s.name,kg,total,paid,change_amount:paid-total,status:'Diproses',created_by:profile.id};
+  let result=await sb.from('transactions').insert({...base,note,due_date:dueDate||null}).select().single();
 
--- Pastikan hanya Owner yang boleh menghapus pelanggan.
-DROP POLICY IF EXISTS "customers_owner_delete" ON public.customers;
-CREATE POLICY "customers_owner_delete"
-ON public.customers
-FOR DELETE
-TO authenticated
-USING (public.is_owner());
+  // Fallback: transaksi tetap tersimpan jika database belum memiliki kolom V7.
+  if(result.error && /note|due_date|schema cache|column/i.test(result.error.message||'')){
+    result=await sb.from('transactions').insert(base).select().single();
+  }
+  if(result.error)return alert(showErr(result.error));
 
-NOTIFY pgrst, 'reload schema';
+  let tx=result.data;
+  alert('Transaksi tersimpan online.');
+  if(sendWhatsApp)waReceipt(tx);else printReceipt(tx);
+  resetKasir();
+  await loadAll();
+}
+
+function receiptNo(t){return t.invoice_no||('INV-'+String(t.id||'').slice(-8).toUpperCase())}
+function formatDateTime(d){try{return new Date(d).toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'})}catch(e){return String(d||'-')}}
+function printReceipt(t){
+  let w=open('','_blank','width=420,height=700');
+  if(!w)return alert('Izinkan pop-up browser untuk mencetak nota.');
+  let note=t.note||'',due=t.due_date||'';
+  w.document.write(`<html><head><title>${receiptNo(t)}</title><style>
+  body{font-family:Arial,sans-serif;width:80mm;margin:auto;padding:10px;color:#111}
+  h2{text-align:center;margin:4px 0;color:#0878d1}.center{text-align:center}
+  .line{border-top:1px dashed #111;margin:10px 0}.row{display:flex;justify-content:space-between;gap:10px;margin:6px 0}
+  .total{font-size:19px;font-weight:800}small{color:#555}</style></head><body>
+  <h2>OCTARI LAUNDRY</h2><div class="center">NOTA LAUNDRY</div><div class="line"></div>
+  <div>No. Nota: <b>${esc(receiptNo(t))}</b></div>
+  <div>Tanggal: ${esc(formatDateTime(t.created_at))}</div>
+  <div>Pelanggan: ${esc(t.customer_name)}</div><div class="line"></div>
+  <div class="row"><span>${esc(t.service_name)} (${t.kg} kg)</span><b>${rup(t.total)}</b></div>
+  ${note?`<div>Catatan: ${esc(note)}</div>`:''}${due?`<div>Estimasi selesai: ${esc(due)}</div>`:''}
+  <div class="line"></div><div class="row"><span>Total</span><b class="total">${rup(t.total)}</b></div>
+  <div class="row"><span>Dibayar</span><span>${rup(t.paid)}</span></div>
+  <div class="row"><span>Kembalian</span><b>${rup(t.change_amount)}</b></div>
+  <div class="row"><span>Status</span><span>${esc(t.status)}</span></div>
+  <div class="line"></div><div class="center">Terima kasih 🙏<br><small>OCTARI LAUNDRY</small></div>
+  <script>window.onload=()=>setTimeout(()=>window.print(),250)<\/script></body></html>`);
+  w.document.close();
+}
+function waOpen(phone,msg){
+  let n=(phone||'').replace(/\D/g,'');if(n.startsWith('0'))n='62'+n.slice(1);if(!n)return false;
+  window.open('https://wa.me/'+n+'?text='+encodeURIComponent(msg),'_blank');return true;
+}
+function waReceipt(t){
+  let msg=`Halo ${t.customer_name},
+
+Berikut nota OCTARI LAUNDRY
+
+No. Nota: ${receiptNo(t)}
+Tanggal: ${formatDateTime(t.created_at)}
+Layanan: ${t.service_name}
+Berat: ${t.kg} kg
+Total: ${rup(t.total)}
+Dibayar: ${rup(t.paid)}
+Kembalian: ${rup(t.change_amount)}
+Status: ${t.status}`+(t.due_date?`\nEstimasi selesai: ${t.due_date}`:'')+(t.note?`\nCatatan: ${t.note}`:'')+`\n\nTerima kasih 🙏`;
+  if(!waOpen(t.customer_wa,msg))alert('Nomor WhatsApp pelanggan belum tersedia.');
+}
+function waDone(t){
+  let msg=`Halo ${t.customer_name},
+
+Pesanan laundry Anda sudah SELESAI. ✅
+
+No. Nota: ${receiptNo(t)}
+Layanan: ${t.service_name}
+Berat: ${t.kg} kg
+Total: ${rup(t.total)}
+
+Silakan mengambil pesanan Anda. Terima kasih 🙏`;
+  if(!waOpen(t.customer_wa,msg))alert('Nomor WhatsApp pelanggan belum tersedia.');
+}
+function resetKasir(){
+  $('kg').value=1;$('paid').value=0;
+  if($('dueDate'))$('dueDate').value=today();
+  if($('trxNote'))$('trxNote').value='';
+  calc();
+}
+async function done(id){let {error}=await sb.from('transactions').update({status:'Selesai'}).eq('id',id);if(error)alert(showErr(error));else await loadAll()}
+async function addCustomer(){let name=$('newName').value.trim(),wa=$('newWa').value.trim();if(!name)return;let {error}=await sb.from('customers').insert({name,wa});if(error)return alert(showErr(error));$('newName').value='';$('newWa').value='';await loadAll()}
+function wa(n){if(!waOpen(n,'Halo, saya dari OCTARI LAUNDRY.'))alert('Nomor WhatsApp pelanggan belum tersedia.')}
+async function addExpense(){if(profile.role!=='owner')return;let name=$('expName').value.trim(),amount=Number($('expAmount').value)||0;if(!name||amount<=0)return;let {error}=await sb.from('expenses').insert({description:name,category:'Lainnya',amount,expense_date:today(),created_by:profile.id});if(error)return alert(showErr(error));$('expName').value='';$('expAmount').value='';await loadAll()}
+async function addService(){let name=prompt('Nama layanan:');if(!name)return;let price=Number(prompt('Harga per kg:'));if(!price)return;let {error}=await sb.from('services').insert({name:name.trim(),price,unit:'kg',active:true});if(error)return alert(showErr(error));await loadAll()}
+async function editService(id){let s=services.find(x=>x.id===id);if(!s)return;let name=prompt('Nama layanan:',s.name);if(name===null)return;let price=Number(prompt('Harga per kg:',s.price));if(!price)return;let {error}=await sb.from('services').update({name:name.trim(),price}).eq('id',id);if(error)return alert(showErr(error));await loadAll()}
+async function deleteService(id){if(services.length<=1)return alert('Minimal 1 layanan.');if(!confirm('Hapus layanan ini?'))return;let {error}=await sb.from('services').update({active:false}).eq('id',id);if(error)return alert(showErr(error));await loadAll()}
+function renderOrders(){
+  let q=($('searchOrder')?.value||'').toLowerCase(),f=$('filterStatus')?.value||'';
+  let a=transactions.filter(x=>(!q||(x.customer_name+x.id+x.service_name).toLowerCase().includes(q))&&(!f||x.status===f));
+  $('orders').innerHTML=a.map(x=>`<div class="order">
+  <span><b>No. Nota ${esc(receiptNo(x))}</b> — ${esc(x.customer_name)}<br>
+  <small>${esc(x.service_name)} • ${x.kg} kg • ${new Date(x.created_at).toLocaleString('id-ID')}</small>
+  ${x.due_date?`<br><small>Estimasi: ${esc(x.due_date)}</small>`:''}
+  ${x.note?`<br><small>Catatan: ${esc(x.note)}</small>`:''}</span>
+  <span><span class="badge ${x.status==='Selesai'?'done':'processing'}">${x.status}</span><br>
+  <button class="small" onclick="printReceipt(transactions.find(a=>a.id==='${x.id}'))">🖨 Nota</button>
+  <button class="small" onclick="waReceipt(transactions.find(a=>a.id==='${x.id}'))">💬 WA</button>
+  ${x.status==='Diproses'?`<button class="small" onclick="done('${x.id}')">✓ Selesai</button>`:`<button class="small" onclick="waDone(transactions.find(a=>a.id==='${x.id}'))">📲 WA Selesai</button>`}
+  </span></div>`).join('')||'<p class="muted">Belum ada pesanan.</p>';
+}
+async function deleteCustomer(id){
+  if(profile?.role!=='owner')return alert('Hanya Owner yang dapat menghapus pelanggan.');
+  const c=customers.find(x=>x.id===id);
+  if(!c)return;
+  if(!confirm(`Hapus pelanggan \"${c.name}\"?\n\nRiwayat transaksi pelanggan tetap akan tersimpan.`))return;
+  const {error}=await sb.from('customers').delete().eq('id',id);
+  if(error)return alert(showErr(error));
+  alert('Pelanggan berhasil dihapus. Riwayat transaksi tetap aman.');
+  await loadAll();
+}
+function renderCustomers(){$('customerList').innerHTML=customers.map(x=>`<div class="order"><span>👤 <b>${esc(x.name)}</b><br><small>${esc(x.wa||'Tanpa nomor WA')}</small></span><span><button class="small" onclick="wa('${x.wa||''}')">Chat WA</button>${profile?.role==='owner'?` <button class="small danger" onclick="deleteCustomer('${x.id}')">🗑 Hapus</button>`:''}</span></div>`).join('')||'<p class="muted">Belum ada pelanggan.</p>'}
+function renderServices(){$('serviceList').innerHTML=services.map(x=>`<div class="service"><span>🧺 <b>${esc(x.name)}</b><small>${rup(x.price)}/kg</small></span><span><button class="small" onclick="editService('${x.id}')">✎ Edit</button> <button class="small" onclick="deleteService('${x.id}')">🗑 Hapus</button></span></div>`).join('')}
+function renderExpenses(){$('expenseList').innerHTML=expenses.map(x=>`<div class="order"><span>${esc(x.expense_date||isoDay(x.created_at))}<br><b>${esc(x.description||'Pengeluaran')}</b></span><b>${rup(x.amount)}</b></div>`).join('')||'<p class="muted">Belum ada pengeluaran.</p>'}
+function renderReports(){let d=$('reportDay').value||today(),m=$('reportMonth').value||today().slice(0,7),tr=transactions.filter(x=>isoDay(x.created_at)===d),ex=expenses.filter(x=>(x.expense_date||isoDay(x.created_at))===d),r=tr.reduce((a,x)=>a+Number(x.total),0),e=ex.reduce((a,x)=>a+Number(x.amount),0);$('dailyReport').innerHTML=`<p>Pendapatan <b>${rup(r)}</b> • Pengeluaran <b>${rup(e)}</b> • Laba <b>${rup(r-e)}</b></p><table class="table"><tr><th>Nota</th><th>Pelanggan</th><th>Total</th></tr>${tr.map(x=>`<tr><td>${x.id.slice(-6)}</td><td>${esc(x.customer_name)}</td><td>${rup(x.total)}</td></tr>`).join('')}</table>`;let tm=transactions.filter(x=>isoDay(x.created_at).startsWith(m)),em=expenses.filter(x=>(x.expense_date||isoDay(x.created_at)).startsWith(m)),rm=tm.reduce((a,x)=>a+Number(x.total),0),ee=em.reduce((a,x)=>a+Number(x.amount),0);$('monthlyReport').innerHTML=`<p>Pendapatan <b>${rup(rm)}</b> • Pengeluaran <b>${rup(ee)}</b> • Laba <b>${rup(rm-ee)}</b> • Transaksi <b>${tm.length}</b></p>`}
+function showPage(id,btn){document.querySelectorAll('.page').forEach(x=>x.classList.remove('active'));$(id).classList.add('active');document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(btn)btn.classList.add('active');$('pageTitle').textContent=id[0].toUpperCase()+id.slice(1)}
+async function logout(){
+  try{
+    await sb.auth.signOut();
+  }catch(e){
+    console.error(e);
+  }
+  profile=null;
+  $('app').style.display='none';
+  $('login').style.display='flex';
+  $('email').value='';
+  $('password').value='';
+  $('loginMsg').textContent='';
+  $('pageTitle').textContent='Login';
+}
+$('kg').oninput=calc;$('paid').oninput=calc;$('svc').onchange=calc;if($('dueDate'))$('dueDate').value=today();
+(async()=>{
+  if(!bootClient()){
+    document.getElementById('setup').style.display='flex';
+    document.getElementById('login').style.display='none';
+    return;
+  }
+  document.getElementById('setup').style.display='none';
+  document.getElementById('login').style.display='flex';
+  document.getElementById('loginMsg').textContent='';
+})();
+</script><script>if("serviceWorker" in navigator)navigator.serviceWorker.register("service-worker.js").catch(()=>{});</script></body></html>
