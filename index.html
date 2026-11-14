@@ -70,9 +70,9 @@ async function saveTx(sendWhatsApp=false){
   let note=$('trxNote')?.value.trim()||'';
 
   if(!c||!s||kg<=0)return alert('Lengkapi transaksi.');
-  if(paid<total)return alert('Uang dibayar kurang.');
+  if(paid<0)return alert('Uang dibayar tidak boleh negatif.');
 
-  let base={customer_id:c.id,service_id:s.id,customer_name:c.name,customer_wa:c.wa||'',service_name:s.name,kg,total,paid,change_amount:paid-total,status:'Diproses',created_by:profile.id};
+  let base={customer_id:c.id,service_id:s.id,customer_name:c.name,customer_wa:c.wa||'',service_name:s.name,kg,total,paid,change_amount:Math.max(0,paid-total),status:'Diproses',created_by:profile.id};
   let result=await sb.from('transactions').insert({...base,note,due_date:dueDate||null}).select().single();
 
   // Fallback: transaksi tetap tersimpan jika database belum memiliki kolom V7.
@@ -89,19 +89,22 @@ async function saveTx(sendWhatsApp=false){
 }
 
 function receiptNo(t){return t.invoice_no||('INV-'+String(t.id||'').slice(-8).toUpperCase())}
+function paymentIsPaid(t){return Number(t.paid||0)>=Number(t.total||0)}
+function paymentStatusText(t){return paymentIsPaid(t)?'LUNAS':'BELUM LUNAS'}
+function paymentCheckboxes(t){return paymentIsPaid(t)?'☐ Belum Lunas    ☑ Lunas':'☑ Belum Lunas    ☐ Lunas'}
 function formatDateTime(d){try{return new Date(d).toLocaleString('id-ID',{dateStyle:'medium',timeStyle:'short'})}catch(e){return String(d||'-')}}
 function printReceipt(t){
   let w=open('','_blank','width=420,height=700');
   if(!w)return alert('Izinkan pop-up browser untuk mencetak nota.');
-  let note=t.note||'',due=t.due_date||'';
+  let note=t.note||'',due=t.due_date||'',logoUrl=new URL('logo-octari.png',location.href).href;
   w.document.write(`<html><head><title>${receiptNo(t)}</title><style>
-  body{font-family:Arial,sans-serif;width:80mm;margin:auto;padding:10px;color:#111}
+  body{font-family:Arial,sans-serif;width:58mm;max-width:58mm;margin:auto;padding:3mm;color:#111;font-size:12px}
   h2{text-align:center;margin:4px 0;color:#0878d1}.center{text-align:center}
   .line{border-top:1px dashed #111;margin:10px 0}.row{display:flex;justify-content:space-between;gap:10px;margin:6px 0}
-  .total{font-size:19px;font-weight:800}small{color:#555}
+  .total{font-size:17px;font-weight:800}small{color:#555}.payment-check{font-size:12px;line-height:1.8;font-weight:700}
 .chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.chart-card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:14px;margin-bottom:10px;min-width:0}.chart-card h3{margin:0 0 5px}.chart-bars{display:flex;align-items:flex-end;gap:10px;height:180px;padding:15px 5px 0;border-bottom:1px solid #dce9f1}.chart-col{flex:1;min-width:0;display:flex;align-items:center;justify-content:flex-end;flex-direction:column;height:100%;gap:5px}.bar-pair{height:145px;display:flex;align-items:flex-end;justify-content:center;gap:4px;width:100%}.bar{width:min(28px,42%);min-height:2px;border-radius:5px 5px 0 0}.bar.income{background:#1688df}.bar.expense{background:#f09a35}.bar.profit{background:#14a878}.chart-label{font-size:10px;color:var(--muted);white-space:nowrap}.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:9px}.legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px}.category-row{display:grid;grid-template-columns:minmax(90px,1fr) 2fr auto;gap:8px;align-items:center;margin:12px 0;font-size:12px}.track{height:11px;background:#edf4f8;border-radius:20px;overflow:hidden}.track span{display:block;height:100%;background:#ef9b35;border-radius:20px}.profit-chart .bar{background:#14a878}.chart-note{font-size:11px;color:var(--muted);margin-top:8px}.table-wrap{overflow-x:auto}@media(max-width:700px){.chart-grid{grid-template-columns:1fr}.chart-bars{height:165px}.category-row{grid-template-columns:90px 1fr auto}}
 </style></head><body>
-  <h2>OCTARI LAUNDRY</h2><div class="center">NOTA LAUNDRY</div><div class="line"></div>
+  <div class="center"><img src="${logoUrl}" style="width:34mm;height:auto;max-height:20mm;object-fit:contain"><h2>OCTARI LAUNDRY</h2>Solusi Tepat Bagi Yang Tak Sempat<br>Jl Pacar Kembang 5 No 58A<br><b>NOTA LAUNDRY</b></div><div class="line"></div>
   <div>No. Nota: <b>${esc(receiptNo(t))}</b></div>
   <div>Tanggal: ${esc(formatDateTime(t.created_at))}</div>
   <div>Pelanggan: ${esc(t.customer_name)}</div><div class="line"></div>
@@ -109,8 +112,9 @@ function printReceipt(t){
   ${note?`<div>Catatan: ${esc(note)}</div>`:''}${due?`<div>Estimasi selesai: ${esc(due)}</div>`:''}
   <div class="line"></div><div class="row"><span>Total</span><b class="total">${rup(t.total)}</b></div>
   <div class="row"><span>Dibayar</span><span>${rup(t.paid)}</span></div>
-  <div class="row"><span>Kembalian</span><b>${rup(t.change_amount)}</b></div>
-  <div class="row"><span>Status</span><span>${esc(t.status)}</span></div>
+  ${!paymentIsPaid(t)?`<div class="row"><span>Sisa tagihan</span><b>${rup(Math.max(0,Number(t.total||0)-Number(t.paid||0)))}</b></div>`:`<div class="row"><span>Kembalian</span><b>${rup(t.change_amount)}</b></div>`}
+  <div><b>Status Pembayaran</b></div><div class="payment-check">${paymentCheckboxes(t).replace('    ','<br>')}</div>
+  <div class="row"><span>Status pesanan</span><span>${esc(t.status)}</span></div>
   <div class="line"></div><div class="center">Terima kasih 🙏<br><small>OCTARI LAUNDRY</small></div>
   <script>window.onload=()=>setTimeout(()=>window.print(),250)<\/script></body></html>`);
   w.document.close();
@@ -130,8 +134,10 @@ Layanan: ${t.service_name}
 Berat: ${t.kg} kg
 Total: ${rup(t.total)}
 Dibayar: ${rup(t.paid)}
-Kembalian: ${rup(t.change_amount)}
-Status: ${t.status}`+(t.due_date?`\nEstimasi selesai: ${t.due_date}`:'')+(t.note?`\nCatatan: ${t.note}`:'')+`\n\nTerima kasih 🙏`;
+${!paymentIsPaid(t)?`Sisa tagihan: ${rup(Math.max(0,Number(t.total||0)-Number(t.paid||0)))}`:`Kembalian: ${rup(t.change_amount)}`}
+Status Pembayaran:
+${paymentCheckboxes(t)}
+Status Pesanan: ${t.status}`+(t.due_date?`\nEstimasi selesai: ${t.due_date}`:'')+(t.note?`\nCatatan: ${t.note}`:'')+`\n\nTerima kasih 🙏`;
   if(!waOpen(t.customer_wa,msg))alert('Nomor WhatsApp pelanggan belum tersedia.');
 }
 function waDone(t){
